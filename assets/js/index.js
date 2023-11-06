@@ -49,7 +49,7 @@ var timeLeft = 60;
 var questionIndex = 0;
 var holdInterval = 0;
 var score = 0;
-var penalty = 2;
+var penalty = 10;
 var startBtn = document.getElementById("start-quiz-btn")
 var questionsDiv = document.getElementById("question-div")
 var createList = document.createElement("ul")
@@ -85,20 +85,21 @@ function compare(event) {
 
     if(element.matches("li")) {
 
-        var divJudge = document.createElement("div");
-        divJudge.setAttribute("id", "divJudge");
+        var feedbackDiv = document.createElement("div");
+        feedbackDiv.setAttribute("id", "feedbackDiv");
 
-        if (element.textContent == questions[questionIndex].answer){
+        if (element.textContent == questions[questionIndex].answer) {
             // user gets answer correct:
             score ++;
-            divJudge.textContent = "Correct Answer!";
+            feedbackDiv.textContent = "Correct Answer!";
         } else {
             // user gets answer incorrect:
             timeLeft = timeLeft - penalty;
-            divJudge.textContent = "Wrong Answer! The correct answer was " + questions[questionIndex].answer;
+            feedbackDiv.textContent = "Wrong Answer! Find the correct answer in the console log";
+            console.log(questions[questionIndex].title, questions[questionIndex].answer)
         }
         setTimeout(function (){
-            divJudge.textContent = "";
+            feedbackDiv.textContent = "";
         }, 1500)
     }
 
@@ -109,7 +110,7 @@ function compare(event) {
     } else {
         render(questionIndex)
     } 
-    divJudge.appendChild(divJudge)
+    questionsDiv.appendChild(feedbackDiv)
 }
 
 // timer
@@ -126,3 +127,79 @@ startBtn.addEventListener("click", function () {
     }, 1000);
     render()
 })
+
+// quiz end
+function quizEnd(){
+    questionsDiv.innerText=""
+    currentTime.innerText=""
+    clearInterval(timer);
+
+    var endTitle = document.createElement("h2")
+    endTitle.setAttribute("id", "endTitle");
+    endTitle.textContent = "All Done!"
+    questionsDiv.appendChild(endTitle)
+
+    var endText = document.createElement("p")
+    endText.setAttribute("id", "endText")
+    questionsDiv.appendChild(endText)
+
+    if (timeLeft >= 0) {
+        var timeRemains = timeLeft;
+        var endText2 = document.createElement("p")
+        clearInterval(holdInterval)
+        endText.textContent = "Your final score is: " + timeRemains;
+
+        questionsDiv.appendChild(endText2);
+    }
+
+    var userInputDiv = document.createElement("div");
+    userInputDiv.setAttribute("id", "userInputDiv");
+    userInputDiv.classList.add("userInputDiv");
+    questionsDiv.appendChild(userInputDiv);
+
+    var label = document.createElement("label");
+    label.setAttribute("id", "label");
+    label.textContent = "Enter your initials: ";
+    label.classList.add("label");
+
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("id", "initials");
+    input.classList.add("input")
+
+    userInputDiv.appendChild(input)
+
+    var submit = document.createElement("button")
+    submit.setAttribute("type", "submit");
+    submit.setAttribute("id", "submit");
+    submit.textContent = "Submit";
+    submit.classList.add("submit");
+
+    userInputDiv.appendChild(submit);
+
+    submit.addEventListener("click", function (){
+        var initials = input.value;
+        if(initials === null) {
+            console.log("No value entered")
+        } else {
+            var finalScore = {
+                initials: initials,
+                score: timeRemains
+            }
+
+            var allHighscores = localStorage.getItem("allHighscores");
+            if (allHighscores === null ) {
+                allHighscores = [];
+            } else {
+                allHighscores = JSON.parse(allHighscores);
+            } 
+            allHighscores.push(finalScore);
+
+            var newScore = JSON.stringify(allHighscores);
+            localStorage.setItem("allHighscores", newScore);
+
+            window.location.replace("./highScores.html")
+        }
+    })
+
+}

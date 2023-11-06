@@ -12,7 +12,8 @@ body {
 }
 
 h1 {
-    margin-bottom: 10px;
+    font-size: 60px;
+    margin-bottom: 20px;
     font-weight: 800;
     text-shadow: 3px 3px 2px black;
     text-align: center;
@@ -23,7 +24,7 @@ h2 {
 }
 
 nav {
-    font-size: large;
+    font-size: 25px;
     font-weight: 400;
     display: flex;
     justify-content: space-between;
@@ -59,7 +60,7 @@ main {
 }
 
 main p {
-    font-size: medium;
+    font-size: 20px;
     text-align: center;
     width: 75%;
     margin: auto;
@@ -86,7 +87,7 @@ button {
     background-color: rgb(181, 44, 44);
     color: white;
     border: 1px solid black;
-    font-size: medium;
+    font-size: 20px;
     border-radius: 5px;
     padding: 5px 10px;
 }
@@ -111,6 +112,8 @@ button:hover {
 .listItem:hover {
     background-color: #e5bc69;
 }
+
+
 
 @media screen and (max-width: 600px){
     h1{

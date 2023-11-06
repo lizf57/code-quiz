@@ -3,6 +3,10 @@
 ## Description
 The Coding Quiz application is a dynmaic, but simple, multiple choice quiz developed using HTML, CSS, and powered by Javascript. The quiz has interactive functions to entertain its users such as a running clock, time deductions, and scoring competition.
 
+![Home page](/assets/images/home.png)
+![Question](/assets/images/question.png)
+![highscore](/assets/images/highscores.png)
+
  ## Table of Contents
   * [Installation](#installation)
   * [Usage](#usage)

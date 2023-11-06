@@ -53,3 +53,76 @@ var penalty = 2;
 var startBtn = document.getElementById("start-quiz-btn")
 var questionsDiv = document.getElementById("question-div")
 var createList = document.createElement("ul")
+
+// render quiz 
+function render() {
+    questionsDiv.innerHTML = ""
+    createList.innerHTML = ""
+    
+    var currentQuestion = questions[questionIndex]
+    var nowQuestion = currentQuestion.title;
+    var nowChoices = currentQuestion.choices;
+
+    var questionTitle = document.createElement("h2");
+    questionTitle.textContent = nowQuestion;
+    questionTitle.classList.add("questionTitle")
+
+    questionsDiv.appendChild(questionTitle);
+
+    nowChoices.forEach(function (choice) {
+        var listItem =document.createElement("li")
+        listItem.textContent = choice;
+        questionsDiv.appendChild(createList)
+        createList.appendChild(listItem)
+        listItem.addEventListener("click", compare);
+        listItem.classList.add('listItem')
+    });
+}
+
+// compare users answers to correct
+function compare(event) {
+    var element = event.target;
+
+    if(element.matches("li")) {
+
+        var divJudge = document.createElement("div");
+        divJudge.setAttribute("id", "divJudge");
+
+        if (element.textContent == questions[questionIndex].answer){
+            // user gets answer correct:
+            score ++;
+            divJudge.textContent = "Correct Answer!";
+        } else {
+            // user gets answer incorrect:
+            timeLeft = timeLeft - penalty;
+            divJudge.textContent = "Wrong Answer! The correct answer was " + questions[questionIndex].answer;
+        }
+        setTimeout(function (){
+            divJudge.textContent = "";
+        }, 1500)
+    }
+
+    questionIndex++;
+
+    if(questionIndex >= questions.length) {
+        quizEnd()
+    } else {
+        render(questionIndex)
+    } 
+    divJudge.appendChild(divJudge)
+}
+
+// timer
+startBtn.addEventListener("click", function () {
+    timer = setInterval(function () {
+        timeLeft--;
+        currentTime.textContent = "Time: " + timeLeft;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            quizEnd();
+            currentTime.textContent = "You're out of Time!";
+        }
+    }, 1000);
+    render()
+})

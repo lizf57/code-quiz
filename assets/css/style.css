@@ -18,8 +18,12 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    height: 10vh;
+}
+
 nav {
-    font-size: medium;
+    font-size: large;
     font-weight: 400;
     display: flex;
     justify-content: space-between;
@@ -39,6 +43,10 @@ nav a:hover{
 
 nav p {
     margin: 30px;
+}
+
+nav i {
+    margin: 10px;
 }
 
 main {
@@ -62,4 +70,44 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+li {
+    background-color: #e8d6b3;
+    padding: 5px 15px;
+    font-size: medium;
+    width: 100%;
+    color: rgb(81, 23, 23);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button {
+    background-color: rgb(181, 44, 44);
+    color: white;
+    border: 1px solid black;
+    font-size: medium;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+button:hover {
+    background-color: rgb(91, 21, 21);
+    cursor: pointer;
+    transition: ease all .7s;
+}
+
+.questionTitle {
+    font-size: x-large;
+    margin-bottom: 20px;
+}
+
+.listItem {
+    margin-bottom: 15px;
+    font-size: large;
+    list-style: none;
+}
+
+.listItem:hover {
+    background-color: #e5bc69;
 }

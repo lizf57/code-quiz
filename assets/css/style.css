@@ -111,3 +111,21 @@ button:hover {
 .listItem:hover {
     background-color: #e5bc69;
 }
+
+@media screen and (max-width: 600px){
+    h1{
+        font-size: 28px;
+        margin-bottom: 35px;
+    }
+
+    .questionTitle {
+        font-size: 23px;
+        margin-bottom: 30px;
+    }
+
+    main p {
+        font-size: 15px;
+        width: 90%;
+        margin-bottom: 30px;
+    }
+}
